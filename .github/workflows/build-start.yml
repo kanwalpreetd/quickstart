@@ -32,7 +32,7 @@ jobs:
     outputs:
       tag-prefix: ${{ steps.tag-prefix.outputs.tag-prefix }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0 # Get all history for the sha count below.
         ref: ${{ github.event.pull_request.head.sha || github.sha }}

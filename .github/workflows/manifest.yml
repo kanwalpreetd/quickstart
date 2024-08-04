@@ -45,7 +45,7 @@ jobs:
         IMAGE_TAG=$(echo ${{ env.IMAGE }} | cut -d':' -f2)
         echo "::set-output name=repo::$IMAGE_REPO"
         echo "::set-output name=tag::$IMAGE_TAG"
-    - uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+    - uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567
       with:
         registry: ${{ env.REGISTRY }}
         username: ${{ secrets.DOCKERHUB_USERNAME || github.actor }}
@@ -60,7 +60,7 @@ jobs:
         docker manifest push ${{ env.IMAGE }}
     - run: |
         docker buildx imagetools create -t ${{ env.IMAGE_ALIAS }} ${{ env.IMAGE }}
-    - uses: actions/github-script@v5
+    - uses: actions/github-script@v7
       with:
         script: |
           github.rest.repos.createCommitStatus({
